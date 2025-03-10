@@ -1,7 +1,7 @@
 package org.example;
 
 public class MetodaBisekcji {
-    public static double bisekcja(Funkcja funkcja, double a, double b, double e, int maxIter) {
+    public static Wynik bisekcja(Funkcja funkcja, double a, double b, double e, int maxIter) {
         double fa = funkcja.wartosc(a);
         double fb = funkcja.wartosc(b);
 
@@ -16,7 +16,7 @@ public class MetodaBisekcji {
             xMid = (a + b) / 2.0; // obliczamy srodek
 
             if (Math.abs(xMid - xS) < e) { // sprawdzamy roznice
-                return xMid;
+                return new Wynik(xMid, i + 1);
             }
             double fMid = funkcja.wartosc(xMid);
             if (fa * fMid < 0) {
@@ -29,8 +29,9 @@ public class MetodaBisekcji {
             xS = xMid;
 
         }
-        return xMid;
+      return new Wynik(xMid, maxIter);
 
 
     }
+
 }

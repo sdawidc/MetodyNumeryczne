@@ -1,7 +1,7 @@
 package org.example;
 
 public class MetodaRegulaFalsi {
-    public static double regulaFalsi(Funkcja funkcja, double a, double b, double e, int maxIter) {
+    public static Wynik regulaFalsi(Funkcja funkcja, double a, double b, double e, int maxIter) {
         double fa = funkcja.wartosc(a);
         double fb = funkcja.wartosc(b);
 
@@ -15,7 +15,7 @@ public class MetodaRegulaFalsi {
             xN = b - fb * (b - a) / (fb - fa);
 
             if (Math.abs(xN - xS) < e) {
-                return xN;
+                return new Wynik(xN, i + 1);
             }
 
             double fN = funkcja.wartosc(xN);
@@ -32,6 +32,6 @@ public class MetodaRegulaFalsi {
             }
             xS = xN;
         }
-        return xN;
+        return new Wynik(xN, maxIter);
     }
 }
