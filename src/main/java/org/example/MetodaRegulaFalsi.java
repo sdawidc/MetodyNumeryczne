@@ -5,8 +5,8 @@ public class MetodaRegulaFalsi {
         double fa = funkcja.wartosc(a);
         double fb = funkcja.wartosc(b);
 
-        if (fa * fb > 0) {
-            throw new IllegalArgumentException("Brak miejsca zerowego w tym przedziale" + a + ", " + b);
+        if (fa * fb >= 0) {
+            throw new IllegalArgumentException("Przedział [" + a +  ", " + b + "] jest nieprawidłowy");
         }
 
         double xS = a;
@@ -24,7 +24,7 @@ public class MetodaRegulaFalsi {
                 //[a, xN]
                 b = xN;
                 fb = fN;
-            } else {
+            } else if (fb * fN < 0) {
                 //[xN, b]
                 a = xN;
                 fa = fN;
@@ -34,4 +34,5 @@ public class MetodaRegulaFalsi {
         }
         return new Wynik(xN, maxIter);
     }
+
 }

@@ -5,8 +5,8 @@ public class MetodaBisekcji {
         double fa = funkcja.wartosc(a);
         double fb = funkcja.wartosc(b);
 
-        if (fa * fb > 0) {
-            throw new IllegalArgumentException("Brak miejsca zerowego w tym przedziale" + a +  ", " + b);
+        if (fa * fb >= 0) {
+            throw new IllegalArgumentException("Przedział [" + a +  ", " + b + "] jest nieprawidłowy");
         }
 
         double xS = a; //poprzednie przyblizenie
@@ -22,12 +22,11 @@ public class MetodaBisekcji {
             if (fa * fMid < 0) {
                 b = xMid; // przesuwamy prawa granice [a, xMId]
                 fb = fMid;
-            } else {
+            } else if (fb * fMid < 0) {
                 a = xMid; //tutaj w [xMid. b]
                 fa = fMid;
             }
             xS = xMid;
-
         }
       return new Wynik(xMid, maxIter);
 
