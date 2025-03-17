@@ -9,6 +9,10 @@ public class Main {
         System.out.println("Wybierz Funkcje");
         System.out.println("1. f(x) = x^2 - 4 ");
         System.out.println("2. f(x) = sin(x) - 0.5");
+        System.out.println("3. f(x) = exp^(x) - 2");
+        System.out.println("4.  f(x) = x^2 + sin(x) - e^(-x)    ");
+        System.out.println("5. Wielomian (użytkownik podaje stopień i współczynniki)");
+
         System.out.println("Twoj wybor:");
         int wyborFunkcji = scanner.nextInt();
         scanner.nextLine();
@@ -33,7 +37,50 @@ public class Main {
                     }
                 };
                 opisFunkcji = "f(x) = sin(x) - 0.5";
-                break; // nie chce mi sie wiecej
+                break;
+
+            case 3:
+                funkcja = new Funkcja() {
+                    @Override
+                    public double wartosc(double x) {
+                        return Math.exp(x) - 2;
+                    }
+                };
+                opisFunkcji = "f(x) = e^x - 2";
+                break;
+
+            case 4:
+                funkcja = new Funkcja() {
+                    @Override
+                    public double wartosc(double x) {
+                        return x * x + Math.sin(x) - Math.exp(-x);
+                    }
+                };
+                opisFunkcji = "f(x) = x^2 + sin(x) - e^(-x)";
+                break;
+            case 5:
+                System.out.println("Podaj stopien wielomianu: ");
+                int n = scanner.nextInt();
+                scanner.nextLine();
+
+                double [] wsp = new double[n+1];
+                for (int i =0; i <= n; i++) {
+                    System.out.println("Podaj wspolczynnik a" + i+ ": ");
+                    wsp[i] = scanner.nextDouble();
+                }
+                scanner.nextLine();
+                funkcja = new Funkcja() {
+                    @Override
+                    public double wartosc(double x) {
+                        return Horner.obliczWielomian(x, wsp);
+                    }
+                };
+                opisFunkcji = "Wielomian stopnia " + n + " (wczytany przez użytkownika)";
+                break;
+
+            default:
+                System.out.println("Nieprawidłowy wybór funkcji");
+                return;
 
 
     }
