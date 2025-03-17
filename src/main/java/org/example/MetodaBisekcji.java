@@ -18,12 +18,18 @@ public class MetodaBisekcji {
             if (Math.abs(xMid - xS) < e) { // sprawdzamy roznice
                 return new Wynik(xMid, i + 1);
             }
+
             double fMid = funkcja.wartosc(xMid);
+
+            if (fMid == 0) {
+                return new Wynik(xMid, i + 1);
+            }
+
             if (fa * fMid < 0) {
                 b = xMid; // przesuwamy prawa granice [a, xMId]
                 fb = fMid;
             } else if (fb * fMid < 0) {
-                a = xMid; //tutaj w [xMid. b]
+                a = xMid; //tutaj w [xMid, b]
                 fa = fMid;
             }
             xS = xMid;

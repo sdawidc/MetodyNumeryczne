@@ -7,12 +7,11 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz Funkcje");
-        System.out.println("1. f(x) = x^2 - 4 ");
+        System.out.println("1. f(x) = -2x^3 + x^2 - 6x + 3");
         System.out.println("2. f(x) = sin(x) - 0.5");
-        System.out.println("3. f(x) = exp^(x) - 2");
-        System.out.println("4. f(x) = x^2 + sin(x) - e^(-x)");
-        System.out.println("5. f(x) = -2x^3 + x^2 - 6x + 3");
-        System.out.println("6. Wielomian (użytkownik podaje stopień i współczynniki)");
+        System.out.println("3. f(x) = exp(x) - 2");
+        System.out.println("4. f(x) = sin(exp(x^2-4)+cos(-exp(x))");
+        System.out.println("5. Wielomian (użytkownik podaje stopień i współczynniki)");
 
         System.out.println("Twoj wybor:");
         int wyborFunkcji = scanner.nextInt();
@@ -22,13 +21,18 @@ public class Main {
         Funkcja funkcja = null;
         switch ((wyborFunkcji)) {
             case 1:
+                double[] wspS = new double[4];
+                wspS[0] = 3;
+                wspS[1] = -6;
+                wspS[2] = 1;
+                wspS[3] = -2;
                 funkcja = new Funkcja() {
                     @Override
                     public double wartosc(double x) {
-                        return x * x - 4;
+                        return Horner.obliczWielomian(x, wspS);
                     }
                 };
-                opisFunkcji = "f(x) = x^2 - 4";
+                opisFunkcji = "f(x) = -2x^3 + x^2 - 6x + 3";
                 break;
             case 2:
                 funkcja = new Funkcja() {
@@ -47,28 +51,22 @@ public class Main {
                         return Math.exp(x) - 2;
                     }
                 };
-                opisFunkcji = "f(x) = e^x - 2";
+                opisFunkcji = "f(x) = exp(x) - 2";
                 break;
-
             case 4:
+                double[] wspZ = new double[3];
+                wspZ[0] = -4;
+                wspZ[1] = 0;
+                wspZ[2] = 1;
                 funkcja = new Funkcja() {
                     @Override
                     public double wartosc(double x) {
-                        return x * x + Math.sin(x) - Math.exp(-x);
+                        return Math.sin(Math.exp(Horner.obliczWielomian(x, wspZ))) + Math.cos(-Math.exp(x));
                     }
                 };
-                opisFunkcji = "f(x) = x^2 + sin(x) - e^(-x)";
+                opisFunkcji = "f(x) = sin(exp(x^2-4))+cos(-exp(x))";
                 break;
             case 5:
-                funkcja = new Funkcja() {
-                    @Override
-                    public double wartosc(double x) {
-                        return -2 * (x * x * x) + x * x - 6 * x + 3;
-                    }
-                };
-                opisFunkcji = "f(x) = -2x^3 + x^2 - 6x + 3";
-                break;
-            case 6:
                 System.out.println("Podaj stopien wielomianu: ");
                 int n = scanner.nextInt();
                 scanner.nextLine();
