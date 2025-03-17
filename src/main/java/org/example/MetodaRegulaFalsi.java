@@ -12,7 +12,7 @@ public class MetodaRegulaFalsi {
         double xS = a;
         double xN = 0.0;
         for (int i = 0; i < maxIter; i++) {
-            //xN = b - fb * (b - a) / (fb - fa);
+
             xN = a - (fa*(b-a))/(fb-fa);
 
             if (Math.abs(xN - xS) < e) {

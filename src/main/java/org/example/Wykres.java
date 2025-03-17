@@ -17,7 +17,7 @@ public class Wykres extends JFrame {
     public Wykres(String tytulOkna, String rownanieFunkcji, Funkcja f, double a, double b, double wynikB, double wynikRF) {
         super(tytulOkna);
 
-        //seria danych dla funkcji f(x)
+
         XYSeries seriaFunkcji = new XYSeries("f(x)");
         int N = 100;
         double krok = (b - a) / (N - 1);
@@ -29,11 +29,9 @@ public class Wykres extends JFrame {
             xx += krok;
         }
 
-        //seria danych dla rozwiazania metoda  bisekcji
         XYSeries seriaB = new XYSeries("Bisekcja");
         seriaB.add(wynikB, 0.0);
 
-        // seria anych dla rozwiazania metoda regula falsi
         XYSeries seriaRF = new XYSeries("Regula Falsi");
         seriaRF.add(wynikRF, 0.0);
 
@@ -42,7 +40,7 @@ public class Wykres extends JFrame {
         zbior.addSeries(seriaB);
         zbior.addSeries(seriaRF);
 
-        //tworzymy wykres
+
         JFreeChart wykres = ChartFactory.createXYLineChart(
                 rownanieFunkcji,
                 "x",
@@ -52,10 +50,8 @@ public class Wykres extends JFrame {
 
 
         XYPlot plot = (XYPlot) wykres.getPlot();
-        /// pobieramy renderer
         XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
 
-        //pokazujemy linie ale bez ksztaltow punktow
         renderer.setSeriesLinesVisible(0, true);
         renderer.setSeriesShapesVisible(0, false);
 

@@ -137,7 +137,7 @@ public class Main {
 
             e = 0;
         } else {
-            System.out.println("Nieprawidlowy wybor...... mozna jakies domyslne ustawic");
+            System.out.println("Nieprawidlowy wybor");
         }
 
         Wynik wynikBisekcji = MetodaBisekcji.bisekcja(funkcja, a, b, e, maxIter);
