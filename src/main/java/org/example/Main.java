@@ -10,8 +10,9 @@ public class Main {
         System.out.println("1. f(x) = x^2 - 4 ");
         System.out.println("2. f(x) = sin(x) - 0.5");
         System.out.println("3. f(x) = exp^(x) - 2");
-        System.out.println("4.  f(x) = x^2 + sin(x) - e^(-x)    ");
-        System.out.println("5. Wielomian (użytkownik podaje stopień i współczynniki)");
+        System.out.println("4. f(x) = x^2 + sin(x) - e^(-x)");
+        System.out.println("5. f(x) = -2x^3 + x^2 - 6x + 3");
+        System.out.println("6. Wielomian (użytkownik podaje stopień i współczynniki)");
 
         System.out.println("Twoj wybor:");
         int wyborFunkcji = scanner.nextInt();
@@ -59,6 +60,15 @@ public class Main {
                 opisFunkcji = "f(x) = x^2 + sin(x) - e^(-x)";
                 break;
             case 5:
+                funkcja = new Funkcja() {
+                    @Override
+                    public double wartosc(double x) {
+                        return -2 * (x * x * x) + x * x - 6 * x + 3;
+                    }
+                };
+                opisFunkcji = "f(x) = -2x^3 + x^2 - 6x + 3";
+                break;
+            case 6:
                 System.out.println("Podaj stopien wielomianu: ");
                 int n = scanner.nextInt();
                 scanner.nextLine();
@@ -75,7 +85,20 @@ public class Main {
                         return Horner.obliczWielomian(x, wsp);
                     }
                 };
-                opisFunkcji = "Wielomian stopnia " + n + " (wczytany przez użytkownika)";
+                String wielomianString = "";
+                for(int i = wsp.length - 1; i >= 0; i--){
+                    if (wsp[i] == (int)wsp[i]) {
+                        wielomianString += (int)wsp[i] + "x^" + i;
+                    } else {
+                        wielomianString += wsp[i] + "x^" + i;
+                    }
+                    if (i>0) {
+                        if (wsp[i-1] >= 0){
+                            wielomianString += "+";
+                        }
+                    }
+                }
+                opisFunkcji = "Wielomian stopnia " + n + ": "+ wielomianString +" (wczytany przez użytkownika)";
                 break;
 
             default:
@@ -106,8 +129,7 @@ public class Main {
 
         if (wyborKryterium == 1) {
             System.out.println("Podaj wartosc: ");
-            String eStr = scanner.nextLine();
-            e = Double.parseDouble(eStr);
+            e = scanner.nextDouble();
 
             maxIter = Integer.MAX_VALUE;
 
